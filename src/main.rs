@@ -1,20 +1,29 @@
 use bevy::prelude::*;
 
 mod creature;
-mod simulation_speed;
-mod player_camera;
 mod food;
+mod player_camera;
+mod rigidbody;
+mod simulation_speed;
 
 use creature::CreaturePlugin;
-use simulation_speed::SimulationSpeedPlugin;
-use player_camera::PlayerCameraPlugin;
 use food::FoodPlugin;
+use player_camera::PlayerCameraPlugin;
+use rigidbody::RigidbodyPlugin;
+use simulation_speed::SimulationSpeedPlugin;
 
 const MAP_WIDTH: i32 = 256;
 const MAP_HEIGHT: i32 = 256;
 
-fn main() -> AppExit{
+fn main() -> AppExit {
     App::new()
-    .add_plugins((DefaultPlugins, CreaturePlugin, SimulationSpeedPlugin, PlayerCameraPlugin, FoodPlugin))
-    .run()
+        .add_plugins((
+            DefaultPlugins,
+            CreaturePlugin,
+            SimulationSpeedPlugin,
+            PlayerCameraPlugin,
+            FoodPlugin,
+            RigidbodyPlugin,
+        ))
+        .run()
 }

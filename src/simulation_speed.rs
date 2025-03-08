@@ -7,11 +7,10 @@ impl Plugin for SimulationSpeedPlugin {
         app.insert_resource(SimulationSpeed(1.0))
             .add_systems(Update, adjust_simulation_speed);
     }
-    
 }
 
 #[derive(Resource)]
-pub struct  SimulationSpeed(pub f32);
+pub struct SimulationSpeed(pub f32);
 
 pub fn adjust_simulation_speed(
     keyboard_input: Res<ButtonInput<KeyCode>>,
@@ -25,7 +24,4 @@ pub fn adjust_simulation_speed(
         speed.0 /= 2.0;
     }
     time.set_relative_speed(speed.0);
-
 }
-
-
