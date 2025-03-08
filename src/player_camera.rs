@@ -43,5 +43,5 @@ fn move_camera(
         direction.x += 1.0;
     }
 
-    transform.translation += direction.normalize_or_zero() * CAMERA_SPEED * time.delta_seconds() / simulation_speed.0;
+    transform.translation += direction.normalize_or_zero() * CAMERA_SPEED * time.delta_secs() / simulation_speed.0;
 }

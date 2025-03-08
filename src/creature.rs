@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 use rand::prelude::*;
 
+use crate::MAP_WIDTH;
+use crate::MAP_HEIGHT;
+
 pub struct CreaturePlugin;
 
 const INITIAL_CREATURE_COUNT: u32 = 10;
-const MAP_WIDTH: i32 = 256;
-const MAP_HEIGHT: i32 = 256;
-
 //Contient tout ce qui est associé au concept de créature
 impl Plugin for CreaturePlugin {
     fn build(&self, app: &mut App) {
