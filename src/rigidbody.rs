@@ -7,6 +7,7 @@ pub struct Velocity(pub Vec2);
 #[derive(Component, Default)]
 pub struct Accel(pub Vec2);
 
+
 pub struct RigidbodyPlugin;
 
 impl Plugin for RigidbodyPlugin {
@@ -21,3 +22,4 @@ fn update_rigidbody_position(mut query: Query<(&mut Velocity, &Accel, &mut Trans
         transform.translation += velocity.0.extend(0.) * time.delta_secs();
     }
 }
+

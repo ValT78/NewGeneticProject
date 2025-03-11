@@ -57,7 +57,7 @@ fn spawn_foods(
         ..default()
     };
     commands.spawn((
-        Food { energy: 80. },
+        Food { energy: 240. },
         Transform::from_xyz(x as f32, y as f32, 0.0),
         sprite,
     ));
