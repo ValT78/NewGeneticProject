@@ -11,7 +11,7 @@ use crate::MAP_WIDTH;
 use crate::food::Food;
 use crate::rigidbody::Velocity;
 
-const INITIAL_CREATURE_COUNT: u32 = 10;
+const INITIAL_CREATURE_COUNT: u32 = 20;
 const EAT_DISTANCE: f32 = 10.;
 
 const MIN_CREATURE_ACCEL: f32 = 10.;

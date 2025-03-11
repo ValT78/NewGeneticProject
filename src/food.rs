@@ -4,7 +4,7 @@ use rand::prelude::*;
 use crate::MAP_HEIGHT;
 use crate::MAP_WIDTH;
 
-const FOOD_SPAWN_INTERVAL: f32 = 0.3;
+const FOOD_SPAWN_INTERVAL: f32 = 0.1;
 
 pub struct FoodPlugin;
 

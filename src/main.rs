@@ -14,8 +14,8 @@ use rigidbody::RigidbodyPlugin;
 use simulation_speed::SimulationSpeedPlugin;
 use collider::ColliderPlugin;
 
-const MAP_WIDTH: i32 = 256;
-const MAP_HEIGHT: i32 = 256;
+const MAP_WIDTH: i32 = 512;
+const MAP_HEIGHT: i32 = 512;
 
 fn main() -> AppExit {
     App::new()
