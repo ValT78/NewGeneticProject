@@ -2,11 +2,10 @@ use bevy::prelude::*;
 
 use crate::rigidbody::Accel;
 
-const FORCE_FACTOR: f32 = 10.0;
-
 #[derive(Component)]
 pub struct Collider {
     pub radius: f32,
+    pub repulsion_force: f32,
 }
 
 
@@ -14,8 +13,6 @@ pub struct Collider {
 pub struct CollisionEvent {
     pub entity_a: Entity,
     pub entity_b: Entity,
-    pub size_a: f32,
-    pub size_b: f32,
 }
 
 
@@ -42,22 +39,23 @@ fn resolve_collisions(
 
             if dist < min_dist && dist > 0.0 {
                 // Calculer la force de répulsion
-                let repulsion_force = dir.normalize() * (min_dist - dist) * FORCE_FACTOR;
+                let a_repulsion_force = dir.normalize() * (min_dist - dist) * entities[j].2.repulsion_force;
+                let b_repulsion_force = -dir.normalize() * (min_dist - dist) * entities[i].2.repulsion_force;
 
                 let (left, right) = entities.split_at_mut(j);
                 match (&mut left[i].3, &mut right[0].3) {
                     (Some(a), Some(b)) => {
-                        // Si les deux entités peuvent bouger, elles se repoussent équitablement
-                        a.0 -= repulsion_force;
-                        b.0 += repulsion_force;
+                        // Si les deux entités peuvent bouger, elles se repoussent
+                        a.0 -= a_repulsion_force;
+                        b.0 += b_repulsion_force;
                     }
                     (Some(a), None) => {
                         // Si SEULEMENT A peut bouger, il prend toute la force
-                        a.0 -= repulsion_force;
+                        a.0 -= a_repulsion_force;
                     }
                     (None, Some(b)) => {
                         // Si SEULEMENT B peut bouger, il prend toute la force
-                        b.0 += repulsion_force;
+                        b.0 += b_repulsion_force;
                     }
                     (None, None) => {
                         // Si aucun ne peut bouger, on ne fait rien
@@ -68,8 +66,6 @@ fn resolve_collisions(
                 collision_events.send(CollisionEvent {
                     entity_a: entities[i].0,
                     entity_b: entities[j].0,
-                    size_a: entities[i].2.radius,
-                    size_b: entities[j].2.radius,
                 });
             }
         }
